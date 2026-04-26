@@ -10,13 +10,20 @@ Investigate a suspicious Android application (`ticket.apk`) used by STRIKE Bank 
 
 ## Step 1: APK Reconnaissance
 
-The challenge begins with an Android package (`ticket.apk`). The first step is to decompile the application and analyze its resources for hardcoded secrets. 
+1. First open the drive link and download the ticket.apk file.
+![challenge](/assets/06-challenge-name.png)
 
-By inspecting the decompiled `resources.arsc` file, I discovered a Firebase URL and a suspicious Base64 encoded string:
+
+2. Next unpack that ticket.apk file by unzip command 
+![download ticket.apk](/assets/07-downloading_ticket.apk.png)
+3. I got some .dex file also resource file
+4. Now i tried string command on all those file and got a base64 encoded data 
+![strings on resources](/assets/08-strings-on-resources.arsc.png)
+
 `dXNlcjpnaXRodWJfcGF0XzExQjJQVDNKWTBueFNtSnlRZjdPSFZfWENvM243ZTJXcUd2bzB0NnV5SnNUVzJNSlRoRjBJdDNRTklrSHRPUjhnQUxOSDVQUjVYbDBKOTJ2WDM=`
 
 Decoding this string revealed a live GitHub Personal Access Token (PAT).
-![Decoded PAT](/assets/01_decoded_pat.png)
+![Decoded PAT](/assets/01_decoded_PAT.png)
 
 ## Step 2: Pivoting to Infrastructure via GitHub API
 
